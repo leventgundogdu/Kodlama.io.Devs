@@ -1,0 +1,22 @@
+package kodlama.io.devs.webApi.controllers;
+
+import kodlama.io.devs.business.abstracts.LanguageService;
+
+//@RestController //annotation
+//@RequestMapping("/api/brands") //Tarayici adresindeki url.
+public class LanguageController {
+	
+	private LanguageService languageService;
+	
+	//@Autowired
+	public LanguageController(LanguageService languageService) {
+		this.languageService = languageService;
+	}
+	
+	//@GetMapping("/getall")
+	public List<Language> getAll() {
+		return languageService.GetAll();
+	}
+	
+	
+}

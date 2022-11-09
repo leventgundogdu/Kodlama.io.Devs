@@ -1,0 +1,72 @@
+package kodlama.io.devs.business.concretes;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import kodlama.io.devs.business.abstracts.LanguageService;
+import kodlama.io.devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.devs.entities.Language;
+
+public class LanguageManager implements LanguageService{
+
+	private LanguageRepository languageRepository;
+	
+	@Autowired
+	public LanguageManager(LanguageRepository languageRepository) {
+		this.languageRepository = languageRepository;
+	}
+
+
+
+	@Override
+	public List<Language> GetAll() {
+		return languageRepository.getAll();
+	}
+
+
+	@Override
+	public Language getLanguageById(int id) throws Exception {
+		
+		return languageRepository.getLanguageById(id);
+	}
+
+
+	@Override
+	public void add(Language language) throws Exception {
+		
+		for (Language language1 : languageRepository.getAll()) {
+			if (language.getName() == language1.getName()) {
+				throw new Exception("Language names can't be same.");
+			}
+			
+			if (language.getName().isEmpty() == true || Integer.toString(language.getId()).isEmpty() == true) {
+				throw new Exception("Language name or id cannot be empty.");
+			}
+			
+		}
+		
+		languageRepository.add(language);
+		
+	}
+
+
+	@Override
+	public void update(Language language, int id) throws Exception {
+		languageRepository.update(language, id);
+		
+	}
+
+
+	@Override
+	public void delete(Language language) {
+		languageRepository.delete(language);
+		
+		
+	}
+	
+	
+	
+	
+	
+}
