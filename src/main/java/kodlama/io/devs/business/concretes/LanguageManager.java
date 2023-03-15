@@ -1,0 +1,113 @@
+package kodlama.io.devs.business.concretes;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import kodlama.io.devs.business.abstracts.LanguageService;
+import kodlama.io.devs.business.requests.CreateLanguageRequest;
+import kodlama.io.devs.business.requests.DeleteLanguageRequest;
+import kodlama.io.devs.business.requests.UpdateLanguageRequest;
+import kodlama.io.devs.business.responses.GetAllLanguagesResponse;
+import kodlama.io.devs.dataAccess.abstracts.LanguageRepository;
+import kodlama.io.devs.entities.Language;
+
+@Service
+public class LanguageManager implements LanguageService{
+
+	private LanguageRepository languageRepository;
+	
+	@Autowired
+	public LanguageManager(LanguageRepository languageRepository) {
+		this.languageRepository = languageRepository;
+	}
+
+
+
+	@Override
+	public List<GetAllLanguagesResponse> getAll() {
+		
+		List<Language> languages = languageRepository.findAll();
+		List<GetAllLanguagesResponse> languagesResponse = new ArrayList<GetAllLanguagesResponse>();
+		
+		for (Language language : languages) {
+			GetAllLanguagesResponse responseItem = new GetAllLanguagesResponse();
+			responseItem.setId(language.getId());
+			responseItem.setName(language.getName());
+			
+			languagesResponse.add(responseItem);
+		}
+		
+		return languagesResponse;
+		
+	}
+
+
+	@Override
+	public Language getLanguageById(int id) throws Exception {
+		
+		return languageRepository.findById(id).orElseThrow();
+	}
+
+
+	@Override
+	public void add(CreateLanguageRequest createLanguageRequest) throws Exception {
+		
+		for (Language language1 : languageRepository.findAll()) {
+			if (createLanguageRequest.getName() == language1.getName()) {
+				throw new Exception("Language names can't be same.");
+			}
+			
+			if (createLanguageRequest.getName().isEmpty() == true) {
+				throw new Exception("Language name or id cannot be empty.");
+			}
+		}
+		
+		Language language = new Language();
+		language.setName(createLanguageRequest.getName());
+		
+		languageRepository.save(language);
+		
+	}
+
+
+
+	@Override
+	public void update(UpdateLanguageRequest updateLanguageRequest) throws Exception {
+		List<Language> languages = languageRepository.findAll();
+		
+		if (updateLanguageRequest.getName().isEmpty()) {
+			throw new Exception("Language name can't be empty.");
+		}
+		
+		for (Language language : languages) {
+			if (language.getName().equals(updateLanguageRequest.getName())) {
+				throw new Exception("Language name can't be the same as another one.");
+			}
+		}
+		
+		Language language = new Language();
+		language.setId(updateLanguageRequest.getId());
+		language.setName(updateLanguageRequest.getName());
+		languageRepository.save(language);
+		
+	}
+
+
+
+	@Override
+	public void delete(DeleteLanguageRequest deleteLanguageRequest) {
+		languageRepository.deleteById(deleteLanguageRequest.getId());
+		
+	}
+
+
+	
+	
+	
+	
+	
+	
+}
