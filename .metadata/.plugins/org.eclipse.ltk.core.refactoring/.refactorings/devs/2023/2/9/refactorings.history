@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename package &apos;kodlama.io.devs.a&apos; to &apos;kodlama.io.devs.business&apos;&#x0D;&#x0A;- Original project: &apos;devs&apos;&#x0D;&#x0A;- Original element: &apos;devs/src/main/java/kodlama.io.devs.a&apos;&#x0D;&#x0A;- Renamed element: &apos;devs/src/main/java/kodlama.io.devs.business&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename package &apos;kodlama.io.devs.a&apos;" flags="589830" hierarchical="false" id="org.eclipse.jdt.ui.rename.package" input="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kodlama.io.devs.a" name="kodlama.io.devs.business" qualified="false" references="true" stamp="1676977650831" textual="false" version="1.0"/>
+</session>

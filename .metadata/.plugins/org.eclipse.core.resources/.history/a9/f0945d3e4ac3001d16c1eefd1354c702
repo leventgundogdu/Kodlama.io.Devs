@@ -1,0 +1,6 @@
+package kodlama.io.devs.business.responses;
+
+public class UpdateAllLanguagesResponse {
+	int id;
+	String name;
+}

@@ -1,37 +1,30 @@
 package kodlama.io.devs.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Table(name = "languages")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
 public class Language {
 	
-	int Id;
-	String Name;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
+	int id;
 	
-	public Language() {
-		
-	}
-
-	public Language(int id, String name) {
-		Id = id;
-		Name = name;
-	}
-	
-	
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getName() {
-		return Name;
-	}
-
-	public void setName(String name) {
-		Name = name;
-	}
-	
+	@Column(name = "name")
+	String name;
 	
 	
 }
